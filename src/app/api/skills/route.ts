@@ -68,17 +68,46 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const data = await request.json()
+    const { category, ...skillData } = await request.json()
+
+    // Handle category relation - connect to existing category or create new one
+    let categoryData: any = undefined
+    if (category) {
+      // If category is a string, try to find the category by name or label
+      if (typeof category === 'string') {
+        const existingCategory = await prisma.skillCategory.findFirst({
+          where: {
+            OR: [
+              { name: { equals: category, mode: 'insensitive' } },
+              { label: { equals: category, mode: 'insensitive' } },
+            ],
+          },
+        })
+        if (existingCategory) {
+          categoryData = { connect: { id: existingCategory.id } }
+        } else {
+          // Create new category if it doesn't exist
+          const newCategory = await prisma.skillCategory.create({
+            data: { name: category, label: category },
+          })
+          categoryData = { connect: { id: newCategory.id } }
+        }
+      } else if (typeof category === 'object' && category.id) {
+        // If category is an object with id, connect directly
+        categoryData = { connect: { id: category.id } }
+      }
+    }
 
     // Get max order for the category
     const maxOrder = await prisma.skill.aggregate({
-      where: { categoryId: data.categoryId },
+      where: { categoryId: skillData.categoryId },
       _max: { order: true },
     })
 
     const skill = await prisma.skill.create({
       data: {
-        ...data,
+        ...skillData,
+        ...(categoryData && { category: categoryData }),
         order: (maxOrder._max.order || 0) + 1,
       },
     })
