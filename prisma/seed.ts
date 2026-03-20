@@ -80,29 +80,49 @@ async function main() {
   })
   console.log('Created default theme')
 
-  // Create sample skills
+  // Create skill categories first
+  const skillCategories = [
+    { name: 'LANGUAGE', label: 'Programming Languages', order: 1 },
+    { name: 'FRAMEWORK', label: 'Frameworks & Libraries', order: 2 },
+    { name: 'DATABASE', label: 'Databases', order: 3 },
+    { name: 'CLOUD', label: 'Cloud & DevOps', order: 4 },
+    { name: 'TOOL', label: 'Tools & Technologies', order: 5 },
+    { name: 'SOFT_SKILL', label: 'Soft Skills', order: 6 },
+  ]
+
+  for (const cat of skillCategories) {
+    await prisma.skillCategory.upsert({
+      where: { name: cat.name },
+      update: {},
+      create: cat,
+    })
+  }
+
+  // Create sample skills with category relation
   const skills = [
-    { name: 'JavaScript', category: 'LANGUAGE', proficiency: 95 },
-    { name: 'TypeScript', category: 'LANGUAGE', proficiency: 90 },
-    { name: 'Python', category: 'LANGUAGE', proficiency: 85 },
-    { name: 'React', category: 'FRAMEWORK', proficiency: 95 },
-    { name: 'Next.js', category: 'FRAMEWORK', proficiency: 90 },
-    { name: 'Node.js', category: 'FRAMEWORK', proficiency: 88 },
-    { name: 'PostgreSQL', category: 'DATABASE', proficiency: 85 },
-    { name: 'MongoDB', category: 'DATABASE', proficiency: 80 },
-    { name: 'AWS', category: 'CLOUD', proficiency: 75 },
-    { name: 'Docker', category: 'TOOL', proficiency: 80 },
-    { name: 'Git', category: 'TOOL', proficiency: 90 },
-    { name: 'Problem Solving', category: 'SOFT_SKILL', proficiency: 95 },
+    { name: 'JavaScript', categoryName: 'LANGUAGE', proficiency: 95 },
+    { name: 'TypeScript', categoryName: 'LANGUAGE', proficiency: 90 },
+    { name: 'Python', categoryName: 'LANGUAGE', proficiency: 85 },
+    { name: 'React', categoryName: 'FRAMEWORK', proficiency: 95 },
+    { name: 'Next.js', categoryName: 'FRAMEWORK', proficiency: 90 },
+    { name: 'Node.js', categoryName: 'FRAMEWORK', proficiency: 88 },
+    { name: 'PostgreSQL', categoryName: 'DATABASE', proficiency: 85 },
+    { name: 'MongoDB', categoryName: 'DATABASE', proficiency: 80 },
+    { name: 'AWS', categoryName: 'CLOUD', proficiency: 75 },
+    { name: 'Docker', categoryName: 'TOOL', proficiency: 80 },
+    { name: 'Git', categoryName: 'TOOL', proficiency: 90 },
+    { name: 'Problem Solving', categoryName: 'SOFT_SKILL', proficiency: 95 },
   ]
 
   for (const skill of skills) {
+    const { categoryName, ...skillData } = skill
     await prisma.skill.upsert({
       where: { id: skill.name.toLowerCase().replace(/\s+/g, '-') },
       update: {},
       create: {
         id: skill.name.toLowerCase().replace(/\s+/g, '-'),
-        ...skill,
+        ...skillData,
+        category: { connect: { name: categoryName } },
       },
     })
   }
