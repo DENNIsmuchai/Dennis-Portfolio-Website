@@ -78,8 +78,8 @@ export async function POST(request: NextRequest) {
         const existingCategory = await prisma.skillCategory.findFirst({
           where: {
             OR: [
-              { name: { equals: category, mode: 'insensitive' } },
-              { label: { equals: category, mode: 'insensitive' } },
+              { name: category },
+              { label: category },
             ],
           },
         })
