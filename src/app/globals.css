@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Professional Finance Theme - Trust, Stability, Prestige */
+    /* Deep Navy Blue - Authority & Trust */
+    --background: 220 35% 8%;
+    --foreground: 210 30% 95%;
+    
+    --card: 220 30% 12%;
+    --card-foreground: 210 25% 92%;
+    
+    --popover: 220 30% 12%;
+    --popover-foreground: 210 25% 92%;
+    
+    /* Primary - Navy Blue for professional trust */
+    --primary: 220 55% 22%;
+    --primary-foreground: 210 30% 95%;
+    
+    /* Secondary - Charcoal for sophistication */
+    --secondary: 215 15% 18%;
+    --secondary-foreground: 210 25% 90%;
+    
+    --muted: 220 20% 18%;
+    --muted-foreground: 215 15% 60%;
+    
+    /* Accent - Rich Gold for prestige and wealth */
+    --accent: 43 65% 50%;
+    --accent-foreground: 220 40% 10%;
+    
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 210 30% 95%;
+    
+    --border: 220 20% 22%;
+    --input: 220 20% 18%;
+    /* Gold ring for call-to-action */
+    --ring: 43 65% 50%;
+    --radius: 0.5rem;
+  }
+
+  .light {
+    /* Professional Finance Light Theme - Clean & Corporate */
+    --background: 210 20% 98%;
+    --foreground: 220 50% 12%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 220 50% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 50% 15%;
+    
+    /* Navy Blue - trust and professionalism */
+    --primary: 220 55% 22%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Subtle gray for secondary elements */
+    --secondary: 210 15% 94%;
+    --secondary-foreground: 220 50% 15%;
+    
+    --muted: 210 15% 92%;
+    --muted-foreground: 215 15% 45%;
+    
+    /* Gold accent - prestige */
+    --accent: 43 65% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 215 15% 85%;
+    --input: 215 15% 90%;
+    --ring: 43 65% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .glass {
+    @apply bg-card/60 backdrop-blur-sm border border-border/30;
+  }
+
+  .glass-strong {
+    @apply bg-card/80 backdrop-blur-sm border border-border;
+  }
+
+  /* Gold glow for prestige */
+  .glow-primary {
+    box-shadow: 0 0 25px -5px hsl(var(--primary) / 0.4);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 25px -5px hsl(var(--secondary) / 0.3);
+  }
+
+  /* Gold accent glow - finance prestige */
+  .glow-gold {
+    box-shadow: 0 0 25px -5px hsl(43 65% 50% / 0.4), 0 0 10px -3px hsl(43 65% 50% / 0.2);
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-gold-shimmer {
+    animation: goldShimmer 3s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px -5px hsl(var(--primary) / 0.5);
+  }
+}
+
+@keyframes goldShimmer {
+  0%, 100% {
+    box-shadow: 0 0 20px -5px hsl(43 65% 50% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px -5px hsl(43 65% 50% / 0.5);
+  }
+}
+
+/* Professional finance gradient background */
+.finance-gradient {
+  background: linear-gradient(135deg, hsl(220 35% 8%) 0%, hsl(220 30% 12%) 50%, hsl(220 25% 10%) 100%);
+}
+
+/* Subtle texture overlay */
+.finance-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Custom scrollbar - professional */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(43 65% 50% / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(43 65% 50% / 0.5);
+}
+
+/* Selection */
+::selection {
+  background: hsl(43 65% 50% / 0.3);
+  color: hsl(var(--foreground));
+}
+
+/* Smooth transitions for theme */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Enhanced focus states */
+*:focus-visible {
+  outline: 2px solid hsl(43 65% 50%);
+  outline-offset: 2px;
+}
