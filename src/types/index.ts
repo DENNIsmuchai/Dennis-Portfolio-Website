@@ -30,7 +30,7 @@ export interface Project {
   images?: string | null
   githubUrl?: string | null
   demoUrl?: string | null
-  techStack?: string | null
+  techStack: string[]
   featured: boolean
   isPublished: boolean
   order: number

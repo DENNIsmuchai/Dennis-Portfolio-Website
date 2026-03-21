@@ -197,9 +197,11 @@ export default function MediaLibraryPage() {
               <FolderPlus className="mr-2 h-4 w-4" /> New Folder
             </Button>
             <Label htmlFor="file-upload" className="cursor-pointer">
-              <Button as="span">
-                <Upload className="mr-2 h-4 w-4" /> Upload Files
-              </Button>
+              <span className="cursor-pointer">
+                <Button>
+                  <Upload className="mr-2 h-4 w-4" /> Upload Files
+                </Button>
+              </span>
               <input
                 id="file-upload"
                 type="file"
@@ -372,9 +374,11 @@ export default function MediaLibraryPage() {
                 <h3 className="text-lg font-semibold mb-2">No files yet</h3>
                 <p className="text-gray-500 mb-4">Upload your first file to get started</p>
                 <Label htmlFor="file-upload-empty" className="cursor-pointer">
-                  <Button as="span">
-                    <Upload className="mr-2 h-4 w-4" /> Upload Files
-                  </Button>
+                  <span className="cursor-pointer">
+                    <Button>
+                      <Upload className="mr-2 h-4 w-4" /> Upload Files
+                    </Button>
+                  </span>
                   <input
                     id="file-upload-empty"
                     type="file"

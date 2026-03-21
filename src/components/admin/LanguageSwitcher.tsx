@@ -6,11 +6,8 @@ import { Globe } from 'lucide-react'
 
 const languages = [
   { value: 'en', label: 'English', flag: '🇺🇸' },
-  { value: 'es', label: 'Español', flag: '🇪🇸' },
   { value: 'fr', label: 'Français', flag: '🇫🇷' },
-  { value: 'de', label: 'Deutsch', flag: '🇩🇪' },
-  { value: 'zh', label: '中文', flag: '🇨🇳' },
-  { value: 'ja', label: '日本語', flag: '🇯🇵' },
+  { value: 'sw', label: 'Kiswahili', flag: '🇰🇪' },
 ]
 
 export function LanguageSwitcher() {
@@ -21,7 +18,7 @@ export function LanguageSwitcher() {
       <Globe className="h-4 w-4 text-muted-foreground" />
       <Select
         value={language}
-        onValueChange={(value) => setLanguage(value as 'en' | 'es' | 'fr' | 'de' | 'zh' | 'ja')}
+        onValueChange={(value: 'en' | 'fr' | 'sw') => setLanguage(value)}
       >
         <SelectTrigger className="w-[140px]">
           <SelectValue placeholder="Language" />

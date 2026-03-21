@@ -43,7 +43,7 @@ export function ProjectsManager({ initialProjects }: ProjectsManagerProps) {
     (project) =>
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.techStack.some((tech) =>
+      project.techStack.some((tech: string) =>
         tech.toLowerCase().includes(searchQuery.toLowerCase())
       )
   )
@@ -190,7 +190,7 @@ export function ProjectsManager({ initialProjects }: ProjectsManagerProps) {
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {project.techStack.slice(0, 3).map((tech) => (
+                    {project.techStack.slice(0, 3).map((tech: string) => (
                       <Badge key={tech} variant="outline" className="text-xs">
                         {tech}
                       </Badge>

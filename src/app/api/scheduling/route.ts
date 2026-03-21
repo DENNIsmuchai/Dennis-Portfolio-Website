@@ -4,10 +4,7 @@ import { prisma } from '@/lib/prisma'
 export async function GET() {
   try {
     const scheduled = await prisma.scheduledContent.findMany({
-      orderBy: { scheduledFor: 'asc' },
-      include: {
-        // Would include related content if we had relations
-      }
+      orderBy: { scheduledFor: 'asc' }
     })
     return NextResponse.json(scheduled)
   } catch (error) {

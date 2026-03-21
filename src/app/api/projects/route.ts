@@ -26,7 +26,13 @@ export async function GET(request: NextRequest) {
       orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
     })
 
-    return NextResponse.json(projects)
+    // Convert techStack from comma-separated string to array
+    const formattedProjects = projects.map((project) => ({
+      ...project,
+      techStack: project.techStack ? project.techStack.split(',').filter(Boolean) : []
+    }))
+
+    return NextResponse.json(formattedProjects)
   } catch (error) {
     console.error('Error fetching projects:', error)
     return NextResponse.json(

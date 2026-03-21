@@ -59,9 +59,9 @@ export function BlogSection({ id, title, posts }: BlogSectionProps) {
                 <CardContent className="flex-1 flex flex-col p-6">
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-3">
-                    {(typeof post.tags === 'string' ? post.tags.split(',') : post.tags || []).slice(0, 3).map((tag: string) => (
+                    {(post.tags || []).slice(0, 3).map((tag: string) => (
                       <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag.trim()}
+                        {tag}
                       </Badge>
                     ))}
                   </div>

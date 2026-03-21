@@ -72,14 +72,14 @@ export function ProjectsSection({ id, title, projects }: ProjectsSectionProps) {
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack && project.techStack.split(',').filter(Boolean).slice(0, 4).map((tech: string) => (
+                    {project.techStack.slice(0, 4).map((tech: string) => (
                       <Badge key={tech} variant="outline" className="text-xs">
-                        {tech.trim()}
+                        {tech}
                       </Badge>
                     ))}
-                    {project.techStack && project.techStack.split(',').filter(Boolean).length > 4 && (
+                    {project.techStack.length > 4 && (
                       <Badge variant="outline" className="text-xs">
-                        +{project.techStack.split(',').filter(Boolean).length - 4}
+                        +{project.techStack.length - 4}
                       </Badge>
                     )}
                   </div>
