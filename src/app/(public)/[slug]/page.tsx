@@ -183,13 +183,4 @@ export default async function CustomPage({ params }: { params: { slug: string } 
   )
 }
 
-export async function generateStaticParams() {
-  const pages = await prisma.customPage.findMany({
-    where: { isPublished: true },
-    select: { slug: true },
-  })
 
-  return pages.map((page) => ({
-    slug: page.slug,
-  }))
-}
